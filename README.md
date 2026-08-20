@@ -3,7 +3,8 @@
 Eight agentic patterns implemented as one system: an insurance claims operations
 pipeline. One shared runtime, one 50-claim labelled dataset, one control plane.
 
-**Live control plane:** _(HF Spaces URL)_
+**Live control plane:** https://lyzr-fde-takehome.streamlit.app/
+**Repo:** https://github.com/KshamaaS/lyzr-fde-takehome
 **Scoping note (Part 1):** [`SCOPING_NOTE.pdf`](./SCOPING_NOTE.pdf) — P6, Human-in-the-Loop Approval
 
 ---
@@ -112,6 +113,13 @@ python3 pipeline.py --all           # end-to-end, all 50 claims
 streamlit run app/streamlit_app.py  # control plane
 pytest                              # test suite
 ```
+
+> **Hosting note.** The control plane is on Streamlit Community Cloud rather
+> than Hugging Face Spaces: HF deprecated the built-in Streamlit SDK, and the
+> remaining route — a Docker Space — moved behind a paid plan. Streamlit Cloud
+> deploys `app/streamlit_app.py` directly from this repo, so there is no second
+> copy of the code to keep in sync. Free-tier apps sleep when idle, so a cold
+> first load takes ~30 seconds.
 
 Runs fully offline. `PROVIDER=mock` (default) is a deterministic backend that
 replays realistic model failure modes — see `DECISIONS.md` D1. Set

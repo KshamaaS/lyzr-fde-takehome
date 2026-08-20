@@ -1,0 +1,16 @@
+# Pin the theme. Without this, Streamlit follows the VIEWER's OS dark-mode
+# preference and sets text to near-white, while the app's CSS hardcodes a light
+# background -- producing white-on-near-white. Pinning is the fix; fighting it
+# with more CSS is not.
+[theme]
+base = "light"
+primaryColor = "#1a1a1a"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f4f4f5"
+textColor = "#18181b"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

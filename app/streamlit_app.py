@@ -59,11 +59,20 @@ st.set_page_config(page_title="Claims Agent Control Plane",
 
 st.markdown("""
 <style>
-  .stApp { background:#fafafa; }
-  h1,h2,h3 { font-family: ui-sans-serif, system-ui; letter-spacing:-.02em; }
-  [data-testid="stMetricValue"] { font-size: 1.5rem; }
+  /* Theme is pinned in .streamlit/config.toml; these only refine it.
+     Deliberately no background or text-colour overrides here -- hardcoding a
+     light background while Streamlit picks text colour from the viewer's
+     dark-mode preference is what produced white-on-white. */
+  h1,h2,h3 { font-family: ui-sans-serif, system-ui; letter-spacing:-.02em;
+             color:#18181b; }
+  [data-testid="stMetricValue"] { font-size:1.5rem; color:#18181b; }
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-          font-size: .82rem; }
+          font-size:.82rem; color:#18181b; }
+  code { color:#166534 !important; background:#f4f4f5 !important; }
+  .stMarkdown, .stMarkdown p, .stMarkdown li { color:#18181b; }
+  [data-testid="stExpander"] summary { color:#18181b !important; }
+  [data-testid="stExpander"] summary p { color:#18181b !important; }
+  .stDataFrame, .stTable { color:#18181b; }
 </style>""", unsafe_allow_html=True)
 
 st.title("Claims Agent Control Plane")
