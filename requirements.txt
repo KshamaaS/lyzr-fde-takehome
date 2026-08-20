@@ -1,0 +1,8 @@
+pydantic>=2.0
+pytest>=7.0
+# UI (also needed by the HF Space)
+streamlit>=1.30
+pandas>=2.0
+# live providers -- optional; everything runs offline on PROVIDER=mock
+# anthropic>=0.40
+# lyzr-adk

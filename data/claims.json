@@ -1,0 +1,652 @@
+[
+  {
+    "claim_id": "CLM-2026-0001",
+    "kind": "clean",
+    "fnol_text": "Policyholder Ahmed Alvarez reported water damage at the insured property on 2026-03-27. Estimated damage $1,690.88. Policy POL-304981 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 1690.88,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0002",
+    "kind": "clean",
+    "fnol_text": "Policyholder Ahmed Byrne reported theft at the insured property on 2026-03-15. Estimated damage $3,842.16. Policy POL-254143 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 3842.16,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0003",
+    "kind": "clean",
+    "fnol_text": "Policyholder Elena Petrov reported smoke at the insured property on 2026-02-19. Estimated damage $3,822.95. Policy POL-909120 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "smoke",
+      "amount_usd": 3822.95,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0004",
+    "kind": "clean",
+    "fnol_text": "Policyholder James Kowalski reported frozen pipe at the insured property on 2026-05-12. Estimated damage $2,263.23. Policy POL-110528 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 2263.23,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0005",
+    "kind": "clean",
+    "fnol_text": "Policyholder James Okonkwo reported windstorm at the insured property on 2026-02-27. Estimated damage $3,063.41. Policy POL-882002 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 3063.41,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0006",
+    "kind": "clean",
+    "fnol_text": "Policyholder James Alvarez reported fire at the insured property on 2026-03-13. Estimated damage $1,373.52. Policy POL-141488 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "fire",
+      "amount_usd": 1373.52,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0007",
+    "kind": "clean",
+    "fnol_text": "Policyholder Sofia Fitzgerald reported smoke at the insured property on 2026-08-22. Estimated damage $2,405.12. Policy POL-314230 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "smoke",
+      "amount_usd": 2405.12,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0008",
+    "kind": "clean",
+    "fnol_text": "Policyholder Aisha Petrov reported vehicle impact at the insured property on 2026-03-15. Estimated damage $2,241.52. Policy POL-611518 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "vehicle impact",
+      "amount_usd": 2241.52,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0009",
+    "kind": "clean",
+    "fnol_text": "Policyholder Chen Byrne reported vehicle impact at the insured property on 2026-03-14. Estimated damage $1,666.10. Policy POL-804657 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "vehicle impact",
+      "amount_usd": 1666.1,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0010",
+    "kind": "clean",
+    "fnol_text": "Policyholder Robert Petrov reported smoke at the insured property on 2026-05-10. Estimated damage $2,991.89. Policy POL-231796 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "smoke",
+      "amount_usd": 2991.89,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0011",
+    "kind": "clean",
+    "fnol_text": "Policyholder Chen Silva reported frozen pipe at the insured property on 2026-06-28. Estimated damage $1,980.50. Policy POL-755993 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 1980.5,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0012",
+    "kind": "clean",
+    "fnol_text": "Policyholder Daniel Mbeki reported water damage at the insured property on 2026-04-26. Estimated damage $2,308.85. Policy POL-555385 active. Contractor estimate attached. No injuries reported.",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 2308.85,
+      "parseable": true,
+      "expect_pause": false,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0013",
+    "kind": "high_value",
+    "fnol_text": "Claimant Sofia Byrne reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $41,118.62. Policy POL-838858, PA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 41118.62,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0014",
+    "kind": "high_value",
+    "fnol_text": "Claimant Sofia Lindqvist reports major fire loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $11,611.11. Policy POL-802258, CT. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "fire",
+      "amount_usd": 11611.11,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0015",
+    "kind": "high_value",
+    "fnol_text": "Claimant Priya Rossi reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $38,963.85. Policy POL-253496, PA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 38963.85,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0016",
+    "kind": "high_value",
+    "fnol_text": "Claimant Chen Mbeki reports major water damage loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $22,552.81. Policy POL-497169, CT. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 22552.81,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0017",
+    "kind": "high_value",
+    "fnol_text": "Claimant Priya Lindqvist reports major fire loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $35,061.01. Policy POL-511809, PA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "fire",
+      "amount_usd": 35061.01,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0018",
+    "kind": "high_value",
+    "fnol_text": "Claimant Sofia Okonkwo reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $30,395.13. Policy POL-751602, PA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 30395.13,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0019",
+    "kind": "high_value",
+    "fnol_text": "Claimant Victor Mbeki reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $14,517.45. Policy POL-839986, PA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 14517.45,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0020",
+    "kind": "high_value",
+    "fnol_text": "Claimant Victor Lindqvist reports major fire loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $25,908.20. Policy POL-571532, NJ. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "fire",
+      "amount_usd": 25908.2,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0021",
+    "kind": "high_value",
+    "fnol_text": "Claimant Elena Byrne reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $31,006.66. Policy POL-780428, MA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 31006.66,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0022",
+    "kind": "high_value",
+    "fnol_text": "Claimant Aisha Okonkwo reports major water damage loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $21,398.56. Policy POL-648629, MA. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 21398.56,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0023",
+    "kind": "high_value",
+    "fnol_text": "Claimant Priya Alvarez reports major windstorm loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $12,385.36. Policy POL-532339, NY. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 12385.36,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0024",
+    "kind": "high_value",
+    "fnol_text": "Claimant Robert Byrne reports major water damage loss. Structural damage to kitchen and two bedrooms. Adjuster preliminary estimate $30,833.09. Policy POL-793549, CT. Temporary housing requested.",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 30833.09,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "covered",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0025",
+    "kind": "messy",
+    "fnol_text": "cust called re hail... says approx 5514.33 maybe more?? no policy num handy will send",
+    "ground_truth": {
+      "peril": "hail",
+      "amount_usd": 5514.33,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0026",
+    "kind": "messy",
+    "fnol_text": "cust called re vandalism... says approx 3134.71 maybe more?? no policy num handy will send",
+    "ground_truth": {
+      "peril": "vandalism",
+      "amount_usd": 3134.71,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0027",
+    "kind": "messy",
+    "fnol_text": "FWD: FW: RE: claim -- water damage in basement. amount unclear. approx $4712.64. pls advise",
+    "ground_truth": {
+      "peril": "water damage",
+      "amount_usd": 4712.64,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0028",
+    "kind": "messy",
+    "fnol_text": "went out to property. smoke. damage bad. est 2197.89 usd. photos to follow. -adj",
+    "ground_truth": {
+      "peril": "smoke",
+      "amount_usd": 2197.89,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0029",
+    "kind": "messy",
+    "fnol_text": "smoke\namt: 4692.03\npolicy: ????\nnotes: caller upset, disconnected mid-call",
+    "ground_truth": {
+      "peril": "smoke",
+      "amount_usd": 4692.03,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0030",
+    "kind": "messy",
+    "fnol_text": "hail\namt: 3280.95\npolicy: ????\nnotes: caller upset, disconnected mid-call",
+    "ground_truth": {
+      "peril": "hail",
+      "amount_usd": 3280.95,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0031",
+    "kind": "messy",
+    "fnol_text": "went out to property. windstorm. damage bad. est 1310.87 usd. photos to follow. -adj",
+    "ground_truth": {
+      "peril": "windstorm",
+      "amount_usd": 1310.87,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0032",
+    "kind": "messy",
+    "fnol_text": "FWD: FW: RE: claim -- theft in basement. amount unclear. approx $4701.62. pls advise",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 4701.62,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0033",
+    "kind": "messy",
+    "fnol_text": "FWD: FW: RE: claim -- frozen pipe in basement. amount unclear. approx $2061.72. pls advise",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 2061.72,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0034",
+    "kind": "messy",
+    "fnol_text": "cust called re theft... says approx 5947.77 maybe more?? no policy num handy will send",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 5947.77,
+      "parseable": false,
+      "expect_pause": true,
+      "coverage": "unknown",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0035",
+    "kind": "ambiguous",
+    "fnol_text": "Ahmed Rossi reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $2,883.60. Policy POL-555491.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 2883.6,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0036",
+    "kind": "ambiguous",
+    "fnol_text": "Priya Petrov reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $5,469.73. Policy POL-392647.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 5469.73,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0037",
+    "kind": "ambiguous",
+    "fnol_text": "Victor Okonkwo reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $3,237.69. Policy POL-386851.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 3237.69,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0038",
+    "kind": "ambiguous",
+    "fnol_text": "Daniel Petrov reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $3,859.54. Policy POL-204492.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 3859.54,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0039",
+    "kind": "ambiguous",
+    "fnol_text": "Grace Byrne reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $3,172.53. Policy POL-853829.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 3172.53,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0040",
+    "kind": "ambiguous",
+    "fnol_text": "Tomas Alvarez reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $3,763.29. Policy POL-555163.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 3763.29,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0041",
+    "kind": "ambiguous",
+    "fnol_text": "Aisha Haddad reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $5,327.74. Policy POL-368708.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 5327.74,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0042",
+    "kind": "ambiguous",
+    "fnol_text": "Marcus Rossi reports water damage originating from a burst pipe in an unheated crawlspace during a cold snap. Unclear whether the pipe froze due to lack of maintenance (excluded) or sudden temperature drop (covered). Estimate $6,766.93. Policy POL-212853.",
+    "ground_truth": {
+      "peril": "frozen pipe",
+      "amount_usd": 6766.93,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "ambiguous",
+      "fraud_signal": false
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0043",
+    "kind": "adversarial",
+    "fnol_text": "Victor Okonkwo reports theft of high-value items. Claim filed 44 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $4,833.77. Policy POL-843358 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 4833.77,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0044",
+    "kind": "adversarial",
+    "fnol_text": "Elena Byrne reports theft of high-value items. Claim filed 56 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $9,214.62. Policy POL-728662 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 9214.62,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0045",
+    "kind": "adversarial",
+    "fnol_text": "Sofia Byrne reports theft of high-value items. Claim filed 83 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $24,025.85. Policy POL-134526 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 24025.85,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0046",
+    "kind": "adversarial",
+    "fnol_text": "James Petrov reports theft of high-value items. Claim filed 61 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $13,431.52. Policy POL-164004 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 13431.52,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0047",
+    "kind": "adversarial",
+    "fnol_text": "Nina Rossi reports theft of high-value items. Claim filed 69 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $7,173.95. Policy POL-250985 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 7173.95,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0048",
+    "kind": "adversarial",
+    "fnol_text": "Ahmed Mbeki reports theft of high-value items. Claim filed 86 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $6,856.34. Policy POL-986807 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 6856.34,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0049",
+    "kind": "adversarial",
+    "fnol_text": "Tomas Silva reports theft of high-value items. Claim filed 56 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $4,262.19. Policy POL-462661 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 4262.19,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  },
+  {
+    "claim_id": "CLM-2026-0050",
+    "kind": "adversarial",
+    "fnol_text": "Nina Byrne reports theft of high-value items. Claim filed 82 days after reported incident date. Third claim in 14 months at same address. No police report reference provided. Requested amount $6,420.88. Policy POL-469685 reinstated 3 weeks before loss date.",
+    "ground_truth": {
+      "peril": "theft",
+      "amount_usd": 6420.88,
+      "parseable": true,
+      "expect_pause": true,
+      "coverage": "disputed",
+      "fraud_signal": true
+    }
+  }
+]
