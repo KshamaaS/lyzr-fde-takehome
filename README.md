@@ -4,6 +4,7 @@ Eight agentic patterns implemented as one system: an insurance claims operations
 pipeline. One shared runtime, one 50-claim labelled dataset, one control plane.
 
 **Live control plane:** https://lyzr-fde-takehome.streamlit.app/
+
 **Repo:** https://github.com/KshamaaS/lyzr-fde-takehome
 **Scoping note (Part 1):** [`SCOPING_NOTE.pdf`](./SCOPING_NOTE.pdf) — P6, Human-in-the-Loop Approval
 
