@@ -109,25 +109,56 @@ class AnthropicProvider(Provider):
 
 class LyzrProvider(Provider):
     """
-    Lyzr ADK path. Deliberately thin: Lyzr owns the agent loop, we own the call.
-    See PLATFORM_NOTES.md for where this is and is not sufficient.
+    Lyzr ADK path (pip package `lyzr-adk`, import name `lyzr`).
+
+    Deliberately thin: Lyzr owns the agent loop, we own the call. Two things it
+    structurally cannot do, which is why P1/P6/P7 stay on the direct path:
+      - Agent.run() returns a COMPLETED response, so there is no seam between a
+        schema validation failure and the retry that repairs it.
+      - Nothing halts before a mutating tool fires.
+
+    Studio exposes async methods only (verified against lyzr-adk 0.1.12), so the
+    agent handle is resolved once in __init__ via asyncio.run and reused. The
+    Agent entity itself has a synchronous .run().
     """
     name = "lyzr"
 
-    def __init__(self, agent_id: Optional[str] = None):
-        from lyzr_adk.adk import Adk           # pip install lyzr-adk
-        self.adk = Adk(api_key=os.environ["LYZR_API_KEY"])
-        self.agent_id = agent_id or os.environ.get("LYZR_AGENT_ID")
+    def __init__(self, agent_key: str = None):
+        import asyncio
+        from lyzr import Studio
+
+        agent_key = agent_key or os.environ.get("LYZR_AGENT", "claims-triage")
+        ids_path = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), "lyzr", "agent_ids.json")
+        if not os.path.exists(ids_path):
+            raise RuntimeError(
+                "lyzr/agent_ids.json missing - run: python3 lyzr/setup_agents.py")
+        ids = json.load(open(ids_path))
+        if agent_key not in ids:
+            raise RuntimeError(f"agent '{agent_key}' not in {ids_path}; "
+                               f"have {list(ids)}")
+
+        self.studio = Studio(api_key=os.environ["LYZR_API_KEY"])
+        self.agent_id = ids[agent_key]
+        self.agent = asyncio.run(self.studio.aget_agent(self.agent_id))
 
     def complete(self, prompt, model, system="", max_tokens=1024, **kw):
         t0 = time.time()
-        r = self.adk.run(agent_id=self.agent_id, message=prompt)
-        text = r.get("response", "") if isinstance(r, dict) else str(r)
-        tin, tout = len(prompt) // 4, len(text) // 4
+        msg = f"{system}\n\n{prompt}" if system else prompt
+        r = self.agent.run(message=msg, session_id=kw.get("session_id"))
+        text = (getattr(r, "response", None)
+                or getattr(r, "text", None)
+                or getattr(r, "content", None)
+                or str(r))
+        # The ADK returns no usage block, so tokens are ESTIMATED from character
+        # counts. Any cost figure on this backend is an approximation -- which is
+        # exactly why P7's measurements are run on the direct provider, not here.
+        tin, tout = max(1, len(msg) // 4), max(1, len(text) // 4)
         return LLMResponse(
             text, model, tin, tout, int((time.time() - t0) * 1000),
             price(model, tin, tout), self.name,
-            raw={"note": "token counts ESTIMATED - ADK returns no usage block"})
+            raw={"note": "tokens ESTIMATED - ADK returns no usage block",
+                 "agent_id": self.agent_id})
 
 
 _PROVIDER: Optional[Provider] = None

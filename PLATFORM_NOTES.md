@@ -66,3 +66,80 @@ rather than after the first overage invoice.
 Community is genuinely enough to evaluate. Above that, the credit meter, not the
 feature list, is what forces the tier decision — and log retention (7 days) will
 force it sooner than credits for anyone with a compliance requirement.
+
+---
+
+## Addendum — findings from the actual SDK (lyzr-adk 0.1.12)
+
+The published docs and the shipped SDK differ substantially. Everything below was
+established by inspecting the installed package, not from documentation.
+
+### 1. Import name does not match the package name
+`pip install lyzr-adk` installs a module imported as `lyzr`. `import lyzr_adk`
+fails. Minor, but it is the first thing a customer's engineer hits.
+
+### 2. `Studio` is async-only
+Every client method is `a`-prefixed — `acreate_agent`, `aget_agent`,
+`acreate_knowledge_base`, `alist_agents`. The only synchronous member is
+`close()`. Entities returned by those calls (`Agent`, `KnowledgeBase`) expose
+both sync and async methods, so the working pattern is: resolve handles
+asynchronously once, then use the entity synchronously.
+
+This is not documented anywhere I could find, and it means a naive
+`studio.create_agent(...)` — the shape the docs imply — fails.
+
+### 3. The platform covers more than the docs suggest
+`AgentModule.create()` takes as first-class parameters:
+
+| Parameter | Corresponds to |
+|---|---|
+| `response_model: Type[BaseModel]` | P1 schema enforcement |
+| `reflection: bool` | P3 self-critique |
+| `llm_judge: bool` | P10 (the project I skipped) |
+| `groundedness_facts: List[str]` | P2 citation grounding |
+| `bias_check: bool` | — |
+| `rai_policy: RAIPolicy` | PII, toxicity, prompt-injection config |
+| `memory: MemoryConfig \| CognisConfig` | P5 memory |
+| `tools`, `local_tools`, `tool_configs` | P4 tool registry |
+
+`RAIModule` ships with `PIIConfig`, `ToxicityConfig`, `PromptInjectionConfig`
+and `SecretsConfig`. `ToolRegistry` and `Tool` exist natively. `SchedulerModule`
+covers the trigger half of P8.
+
+**This strengthens rather than weakens the boundary I drew.** These are all
+*configuration flags on a single `Agent.run()`*. The gap is not capability, it
+is control flow:
+
+- `reflection=True` runs a self-critique — but I cannot read what the reflection
+  concluded and branch on it, cap iterations on a no-progress signal, or
+  terminate on a repeated action. P3's loop guard is not expressible.
+- `response_model` validates — but when validation fails I cannot construct a
+  repair prompt carrying the validator's exact error text and retry. That single
+  line is what takes P1 from 62% to 100%.
+- `llm_judge=True` scores — but I cannot regenerate under constraints derived
+  from the critique.
+- Nothing halts execution *before* a mutating tool fires, which is the entire
+  requirement of P6.
+
+### 4. Cost accounting is not available
+`Agent.run()` returns no usage block. `LyzrProvider` estimates tokens from
+character counts and flags them as estimates in `LLMResponse.raw`. This is why
+every P7 measurement in this repo runs on the direct provider — a cost
+comparison built on estimated tokens would not be worth reporting.
+
+**This is the single most valuable thing I would ask the platform team for.**
+A customer cannot do cost attribution, chargeback, or budget enforcement without
+per-call token counts, and it cannot be reconstructed downstream.
+
+### 5. Default credential routes to OpenAI
+`llm_credential_id` defaults to `'lyzr_openai'`. Using Anthropic requires
+configuring a credential in Studio first — worth knowing before promising a
+customer a specific model.
+
+### What I would ask for, in priority order
+
+1. **Usage/token counts on `AgentResponse`** — blocks all cost work.
+2. **A callback or generator seam on the agent loop** so reflection output and
+   tool-call intent are observable and interceptable before the next step.
+3. **A pre-tool-execution hook** — enough on its own to make P6 expressible natively.
+4. **Sync wrappers on `Studio`**, or documentation stating it is async-only.
