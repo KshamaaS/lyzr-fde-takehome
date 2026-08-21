@@ -142,10 +142,25 @@ class LyzrProvider(Provider):
         self.agent_id = ids[agent_key]
         self.agent = asyncio.run(self.studio.aget_agent(self.agent_id))
 
+        # Attach the KB at RUN time rather than at create time.
+        # Agent.run(knowledge_bases=[...]) exists; binding at creation would
+        # make the agent single-corpus forever, and a carrier needs one agent
+        # over per-jurisdiction corpora. Without this the agent follows its own
+        # instructions ("use the attached knowledge base"), finds none, and
+        # correctly returns INSUFFICIENT for every question.
+        self.kbs = []
+        if ids.get("kb_id"):
+            try:
+                self.kbs = [asyncio.run(
+                    self.studio.aget_knowledge_base(ids["kb_id"]))]
+            except Exception as e:
+                print(f"[lyzr] KB attach failed, agent will run bare: {e}")
+
     def complete(self, prompt, model, system="", max_tokens=1024, **kw):
         t0 = time.time()
         msg = f"{system}\n\n{prompt}" if system else prompt
-        r = self.agent.run(message=msg, session_id=kw.get("session_id"))
+        r = self.agent.run(message=msg, session_id=kw.get("session_id"),
+                           knowledge_bases=self.kbs or None)
         text = (getattr(r, "response", None)
                 or getattr(r, "text", None)
                 or getattr(r, "content", None)

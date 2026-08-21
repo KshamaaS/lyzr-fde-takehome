@@ -143,3 +143,82 @@ customer a specific model.
    tool-call intent are observable and interceptable before the next step.
 3. **A pre-tool-execution hook** — enough on its own to make P6 expressible natively.
 4. **Sync wrappers on `Studio`**, or documentation stating it is async-only.
+
+### 11. Knowledge bases attach at run time, not at agent creation
+`AgentModule.create()` has no `knowledge_base` parameter; `Agent.run()` takes
+`knowledge_bases=[...]`. An agent created with instructions referencing "the
+attached knowledge base" and run without one does not error -- it follows its
+instructions, finds nothing, and returns INSUFFICIENT for every question. The
+failure is silent and looks exactly like correct conservative behaviour.
+
+Run-time attachment is arguably the better design (one agent over
+per-jurisdiction corpora, rather than one agent per corpus), but nothing warns
+you when an agent's prompt references a resource it was never given.
+
+### 12. `QueryResult` carries metadata that ingestion cannot set
+`QueryResult` exposes `text, score, source, metadata, id, page, chunk_index`.
+So retrieval *can* return per-chunk metadata -- but `aadd_text(text, source,
+chunk_size, chunk_overlap)` provides no way to write it. The read side supports
+a richer contract than the write side can populate.
+
+For P2 this is the difference between clause-level citations working natively
+and having to reconstruct section ids by matching returned passages back onto a
+local parse. Exposing metadata at ingestion would close it in one parameter.
+
+### 13. Hosted agents own the system prompt; callers cannot override it
+Agent instructions are fixed at creation and applied server-side. A caller's
+formatting requirements arrive as user-turn content and lose to them.
+
+Observed directly: with the KB attached, `claims_policy_qa` answered every
+in-domain question, and P2's citation contract then dropped **every sentence**,
+because the agent cited in its own form rather than the `[DOC_ID:SEC-N]` form
+P2 requires. The guardrail behaved correctly against a model whose output it
+could not control.
+
+**Consequence:** output-format guarantees are not composable with a hosted
+agent unless the format is baked into the agent at creation — which means one
+agent per downstream contract, and no way to evolve the contract without
+re-provisioning. This is why P2's measured numbers come from the direct
+provider path, where the system prompt is mine.
+
+---
+
+## Summary — what I would ask the platform team for
+
+In priority order, from thirteen findings established by building rather than
+reading documentation:
+
+1. **Usage/token counts on `AgentResponse`.** Blocks all cost attribution,
+   chargeback and budget enforcement, and cannot be reconstructed downstream.
+2. **Fix `alist_documents()` deserialisation.** The SDK cannot read back
+   documents it successfully wrote, which makes idempotent provisioning
+   impossible and silently duplicates corpora on retry.
+3. **A pre-tool-execution hook.** Enough on its own to make P6's approval gate
+   expressible natively.
+4. **Per-document metadata at ingestion.** `QueryResult` already returns a
+   `metadata` field that `aadd_text` cannot populate; one parameter closes the
+   gap and makes clause-level citation grounding native.
+5. **A callback or generator seam on the agent loop**, so reflection output and
+   tool-call intent are observable and interceptable between steps.
+6. **Caller-supplied system prompt at run time**, or documented guidance that
+   output contracts require a dedicated agent.
+7. **Sync wrappers on `Studio`**, or documentation stating it is async-only.
+
+## What this exercise actually showed
+
+The boundary is not capability. `AgentModule.create()` exposes `response_model`,
+`reflection`, `llm_judge`, `groundedness_facts`, `rai_policy`, `memory` and
+`tools` — covering the surface of P1, P2, P3, P4, P5 and P10 as configuration.
+
+The boundary is **control flow**. Every one of those is a flag on a single
+`Agent.run()` that returns a completed response. I can enable reflection but not
+branch on what it concluded; validate against a schema but not construct a
+repair prompt from the validator's error; enable an LLM judge but not regenerate
+under constraints derived from its critique; and nothing halts before a mutating
+tool fires.
+
+Two of these failures were **silent** — an agent with no KB attached, and a
+citation guardrail rejecting everything — and both looked exactly like correct
+conservative behaviour. That is the hardest failure mode to catch in agent
+systems, and it is the strongest argument for owning the loop in code where the
+control points are visible.

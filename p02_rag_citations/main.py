@@ -118,24 +118,58 @@ class LocalRetriever:
 class LyzrRetriever:
     """
     Lyzr Knowledge Base path. The KB owns chunking, embedding and the vector
-    store; we own the citation contract on top. See PLATFORM_NOTES.md for the
-    one thing this costs us (chunk boundaries are not ours to choose).
+    store; we own the citation contract on top.
+
+    THE COST OF USING IT (see PLATFORM_NOTES.md):
+    chunk boundaries are not ours to choose, and per-document annotation is a
+    single `source` string -- there is no metadata dict. So the section id that
+    P2's citations depend on cannot be attached at ingestion. We recover it by
+    matching the returned text back onto the locally parsed corpus. That works
+    here because the corpus is small and the section headers are distinctive;
+    it would not scale, and it is the concrete reason clause-level citation
+    grounding is not fully expressible on a Lyzr KB today.
     """
     name = "lyzr"
 
     def __init__(self, chunks):
-        from lyzr_adk.adk import Adk
-        self.adk = Adk(api_key=os.environ["LYZR_API_KEY"])
-        self.kb_id = os.environ["LYZR_KB_ID"]
+        import asyncio
+        from lyzr import Studio
+
+        ids_path = os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), "lyzr", "agent_ids.json")
+        kb_id = os.environ.get("LYZR_KB_ID")
+        if not kb_id and os.path.exists(ids_path):
+            kb_id = json.load(open(ids_path)).get("kb_id")
+        if not kb_id:
+            raise RuntimeError(
+                "no kb_id -- run python3 lyzr/setup_agents.py, or set LYZR_KB_ID")
+
+        self.studio = Studio(api_key=os.environ["LYZR_API_KEY"])
+        self.kb = asyncio.run(self.studio.aget_knowledge_base(kb_id))
         self.chunks = {c.id: c for c in chunks}
+        # first ~60 chars of each chunk body -> chunk id, for recovering the
+        # section id the platform cannot carry for us
+        self._by_text = {c.text[:60].strip(): c for c in chunks}
+
+    def _resolve(self, text: str, source: str):
+        """Map a returned passage back to a clause id."""
+        for prefix, ch in self._by_text.items():
+            if prefix and prefix in text:
+                return ch
+        # fall back: source carries the doc id, but not the section
+        return Chunk(f"{source or 'LYZR'}:UNRESOLVED", "", text)
 
     def search(self, q, k=TOP_K):
-        res = self.adk.knowledge_base.query(kb_id=self.kb_id, query=q, top_k=k)
+        # score_threshold=0.0 deliberately: P2 owns the abstain decision, not
+        # the platform. Filtering here would hide the score that ABSTAIN_BELOW
+        # is measured against.
+        res = self.kb.query(query=q, top_k=k, score_threshold=0.0)
         out = []
-        for r in res.get("results", []):
-            cid = r.get("metadata", {}).get("section_id", "UNKNOWN")
-            ch = self.chunks.get(cid) or Chunk(cid, "", r.get("text", ""))
-            out.append((round(float(r.get("score", 0)), 4), ch))
+        for r in res:
+            text = getattr(r, "text", None) or getattr(r, "content", "") or ""
+            score = float(getattr(r, "score", 0.0) or 0.0)
+            source = getattr(r, "source", None) or ""
+            out.append((round(score, 4), self._resolve(text, source)))
         return out
 
 

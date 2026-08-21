@@ -61,7 +61,9 @@ async def main():
         # --- knowledge base -------------------------------------------------
         print("creating knowledge base...")
         kb = await studio.acreate_knowledge_base(
-            name="claims-policy-corpus",
+            # KB names are constrained to lowercase/digits/underscore -- the
+            # SDK rejects hyphens at the Pydantic layer, not the API layer.
+            name="claims_policy_corpus",
             description="HO-3 policy sections and claims settlement authority matrix",
             vector_store="qdrant",
             embedding_model="text-embedding-3-large")
@@ -75,8 +77,13 @@ async def main():
         for path in docs:
             doc_id = os.path.basename(path).replace(".md", "")
             print(f"  adding {doc_id}")
-            await kb.aadd_text(text=open(path).read(),
-                        metadata={"doc_id": doc_id, "source": "HO3_policy"})
+            # `source` is the only per-document field the SDK accepts -- there
+            # is no metadata dict. We put the doc_id there because P2's citation
+            # contract needs a stable, clause-addressable identifier to come back
+            # out of retrieval. chunk_size is left at the default: the corpus is
+            # already split on section headers, which are the legally meaningful
+            # boundaries.
+            await kb.aadd_text(text=open(path).read(), source=doc_id)
         print(f"  {len(docs)} documents ingested")
 
         # --- agents ---------------------------------------------------------
